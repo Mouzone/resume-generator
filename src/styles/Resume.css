@@ -1,6 +1,8 @@
 #resume {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    padding: 50px;
 }
 
 #personalBar {

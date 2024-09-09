@@ -1,13 +1,15 @@
 #root {
   display: flex;
   padding: 50px;
+  background-color: whitesmoke;
+  gap: 20px;
 }
 
 #inputs {
-  width: 40%;
+  width: 30%;
 }
 
 #resume {
-  width: 60%;
+  width: 70%;
 }
 

@@ -154,24 +154,27 @@ function Experience({ state, setState }) {
                 value={ state["location"] }
                 handleChange={ changeLocation }
             />
-            <Input
-                label="Description"
-                value={ state["description"] }
-                handleChange={ changeDescription }
-            />
+            <label>
+                Description
+                {' '}
+                <textarea
+                    value={state["description"]}
+                    onChange={changeDescription}
+                />
+            </label>
         </div>
     )
 }
 
-function Input({ label, value, handleChange }) {
+function Input({label, value, handleChange}) {
     return (
         <label>
-            { label }
-            { ' ' }
+            {label}
+            {' '}
             <input
-                value={ value }
-                onChange={ handleChange }
-                />
+                value={value}
+                onChange={handleChange}
+            />
         </label>
     )
 }

@@ -1,6 +1,7 @@
 #inputs {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 #personalInput,
@@ -8,8 +9,32 @@
 #educationInput {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .dates {
     display: flex;
+    gap: 5%;
+}
+
+.dates label {
+    width: 47.5%;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input {
+    padding: 10px;
+}
+
+textarea {
+    height: 100px;
+    padding: 10px;
 }
