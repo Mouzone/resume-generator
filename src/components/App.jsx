@@ -12,7 +12,7 @@ function App() {
                                                                    degree: "Basketball",
                                                                    start: "9/2007",
                                                                    end: "5/2009",
-                                                                   location: "Winston-Salem, North Carolina"
+                                                                   location: "Winston-Salem, NC"
     })
     const [ experience, setExperience ] = useState({ company: "Atlanta Hawks",
                                                                     position: "Point Guard",
