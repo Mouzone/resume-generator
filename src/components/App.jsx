@@ -41,7 +41,9 @@ function App() {
                 />
             </div>
             <Resume
-                states={ [personal, education, experience] }
+                personal={ personal }
+                education={ education }
+                experience={ experience }
             />
         </>
     )
