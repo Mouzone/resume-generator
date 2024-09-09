@@ -18,7 +18,7 @@ function Personal({ state, setState }) {
     }
 
     return (
-        <>
+        <div id="personalInput">
             <h2> Personal Details </h2>
             <Input
                 label="Full Name"
@@ -40,7 +40,7 @@ function Personal({ state, setState }) {
                 value={ state["address"] }
                 handleChange={ changeAddress }
                 />
-        </>
+        </div>
     )
 }
 
@@ -66,7 +66,7 @@ function Education({ state, setState }) {
     }
 
     return (
-        <>
+        <div id="educationInput">
             <h2> Education </h2>
             <Input
                 label="School"
@@ -93,7 +93,7 @@ function Education({ state, setState }) {
                 value={ state["location"] }
                 handleChange={ changeLocation }
             />
-        </>
+        </div>
     )
 }
 
@@ -123,7 +123,7 @@ function Experience({ state, setState }) {
     }
 
     return (
-        <>
+        <div id="experienceInput">
             <h2> Professional Experience </h2>
             <Input
                 label="Company Name"
@@ -155,7 +155,7 @@ function Experience({ state, setState }) {
                 value={ state["description"] }
                 handleChange={ changeDescription }
             />
-        </>
+        </div>
     )
 }
 
