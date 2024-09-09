@@ -2,7 +2,7 @@ import "../styles/Resume.css"
 
 export default function Resume({ personal, education, experience }) {
     return (
-        <div id="Resume">
+        <div id="resume">
             <div id="personal">
                 <h1> {personal["name"]}</h1>
                 <div id="personalBar">

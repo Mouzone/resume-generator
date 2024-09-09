@@ -1,4 +1,13 @@
 #root {
   display: flex;
+  padding: 50px;
+}
+
+#inputs {
+  width: 40%;
+}
+
+#resume {
+  width: 60%;
 }
 
