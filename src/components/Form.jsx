@@ -93,8 +93,65 @@ function Education( {state, setState} ) {
     )
 }
 
-function Experience(state, setState) {
+function Experience( {state, setState} ) {
+    function changeCompany(e) {
+        setState( {...state, company: e.target.value} )
+    }
 
+    function changePosition(e) {
+        setState( {...state, position: e.target.value} )
+    }
+
+    function changeStart(e) {
+        setState( {...state, start: e.target.value} )
+    }
+
+    function changeEnd(e) {
+        setState( {...state, end: e.target.value} )
+    }
+
+    function changeLocation(e) {
+        setState( {...state, location: e.target.value} )
+    }
+
+    function changeDescription(e) {
+        setState( {...state, description: e.target.value})
+    }
+
+    return (
+        <>
+            <Input
+                label="Company Name"
+                value={state["company"]}
+                handleChange={changeCompany}
+            />
+            <Input
+                label="Position"
+                value={state["position"]}
+                handleChange={changePosition}
+            />
+            <Input
+                label="Start Date"
+                value={state["start"]}
+                handleChange={changeStart}
+            />
+            <Input
+                label="End Date"
+                value={state["end"]}
+                handleChange={changeEnd}
+            />
+            <Input
+                label="Location"
+                value={state["location"]}
+                handleChange={changeLocation}
+            />
+            <Input
+                label="Description"
+                value={state["description"]}
+                handleChange={changeDescription}
+            />
+        </>
+    )
 }
 
 function Input( {label, value, handleChange} ) {
