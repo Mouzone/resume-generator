@@ -1,3 +1,5 @@
+import "../styles/Form.css"
+
 function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
@@ -17,6 +19,7 @@ function Personal({ state, setState }) {
 
     return (
         <>
+            <h2> Personal Details </h2>
             <Input
                 label="Full Name"
                 value={ state["name"] }
@@ -64,6 +67,7 @@ function Education({ state, setState }) {
 
     return (
         <>
+            <h2> Education </h2>
             <Input
                 label="School"
                 value={ state["school"] }
@@ -120,6 +124,7 @@ function Experience({ state, setState }) {
 
     return (
         <>
+            <h2> Professional Experience </h2>
             <Input
                 label="Company Name"
                 value={ state["company"] }

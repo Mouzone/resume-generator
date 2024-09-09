@@ -1,0 +1,12 @@
+#resume {
+    display: flex;
+    flex-direction: column;
+}
+
+#personalBar {
+    display: flex;
+}
+
+.item {
+    display: flex;
+}

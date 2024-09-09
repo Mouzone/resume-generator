@@ -26,7 +26,7 @@ function App() {
 
     return (
         <>
-            <div className="inputs">
+            <div id="inputs">
                 <Personal
                     state={ personal }
                     setState={ setPersonal }
