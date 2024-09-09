@@ -8,15 +8,17 @@
 #personal,
 #education,
 #experience {
-    padding: 20px 50px 20px 50px;
+    padding: 20px 50px 5px 50px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 #personal {
     background-color: lightsteelblue;
+    padding: 30px 50px 30px 50px;
     align-items: center;
+    gap: 10px;
 }
 
 #personalBar {
@@ -39,6 +41,24 @@
 .item {
     display: flex;
     gap: 10px;
+    font-size: 18px;
 }
 
-/* every item in resume's right get 3rd div and add text-overflow*/
+.item .left,
+.item .right {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.item .left {
+    width: 25%;
+}
+
+.item .right {
+    width: 80%;
+}
+
+.right p:first-child {
+    font-weight: bold;
+}

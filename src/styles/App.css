@@ -3,6 +3,7 @@
   padding: 50px;
   background-color: whitesmoke;
   gap: 20px;
+  justify-content: center;
 }
 
 #inputs {
@@ -10,6 +11,6 @@
 }
 
 #resume {
-  width: 70%;
+  width: 60%;
 }
 
