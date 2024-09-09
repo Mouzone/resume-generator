@@ -41,8 +41,56 @@ function Personal( {state, setState} ) {
     )
 }
 
-function Education(state, setState) {
+function Education( {state, setState} ) {
+    function changeSchool(e) {
+        setState( {...state, school: e.target.value} )
+    }
 
+    function changeDegree(e) {
+        setState( {...state, degree: e.target.value} )
+    }
+
+    function changeStart(e) {
+        setState( {...state, start: e.target.value} )
+    }
+
+    function changeEnd(e) {
+        setState( {...state, end: e.target.value} )
+    }
+
+    function changeLocation(e) {
+        setState( {...state, location: e.target.value})
+    }
+
+    return (
+        <>
+            <Input
+                label="School"
+                value={state["school"]}
+                handleChange={changeSchool}
+            />
+            <Input
+                label="Degree"
+                value={state["degree"]}
+                handleChange={changeDegree}
+            />
+            <Input
+                label="Start"
+                value={state["start"]}
+                handleChange={changeStart}
+            />
+            <Input
+                label="End"
+                value={state["end"]}
+                handleChange={changeEnd}
+            />
+            <Input
+                label="Location"
+                value={state["location"]}
+                handleChange={changeLocation}
+            />
+        </>
+    )
 }
 
 function Experience(state, setState) {
