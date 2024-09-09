@@ -27,14 +27,24 @@ function App() {
     return (
         <>
             <div className="inputs">
-                <Personal state={ personal } setState={ setPersonal }></Personal>
-                <Education state={ education } setState={ setEducation }></Education>
-                <Experience state={ experience } setState={ setExperience }> </Experience>
+                <Personal
+                    state={ personal }
+                    setState={ setPersonal }
+                />
+                <Education
+                    state={ education }
+                    setState={ setEducation }
+                />
+                <Experience
+                    state={ experience }
+                    setState={ setExperience }
+                />
             </div>
-            <Resume states={ [personal, education, experience] }></Resume>
+            <Resume
+                states={ [personal, education, experience] }
+            />
         </>
     )
-
 }
 
 export default App
