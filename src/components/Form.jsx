@@ -78,16 +78,18 @@ function Education({ state, setState }) {
                 value={ state["degree"] }
                 handleChange={ changeDegree }
             />
-            <Input
-                label="Start"
-                value={ state["start"] }
-                handleChange={ changeStart }
-            />
-            <Input
-                label="End"
-                value={ state["end"] }
-                handleChange={ changeEnd }
-            />
+            <div className="dates">
+                <Input
+                    label="Start"
+                    value={ state["start"] }
+                    handleChange={ changeStart }
+                />
+                <Input
+                    label="End"
+                    value={ state["end"] }
+                    handleChange={ changeEnd }
+                />
+            </div>
             <Input
                 label="Location"
                 value={ state["location"] }
@@ -135,16 +137,18 @@ function Experience({ state, setState }) {
                 value={ state["position"] }
                 handleChange={ changePosition }
             />
-            <Input
-                label="Start Date"
-                value={ state["start"] }
-                handleChange={ changeStart }
-            />
-            <Input
-                label="End Date"
-                value={ state["end"] }
-                handleChange={ changeEnd }
-            />
+            <div className="dates">
+                <Input
+                    label="Start Date"
+                    value={ state["start"] }
+                    handleChange={ changeStart }
+                />
+                <Input
+                    label="End Date"
+                    value={ state["end"] }
+                    handleChange={ changeEnd }
+                />
+            </div>
             <Input
                 label="Location"
                 value={ state["location"] }
