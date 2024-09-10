@@ -32,6 +32,18 @@ h2 {
     gap: 10px;
 }
 
+ul,
+li {
+    list-style: none;
+}
+
+li {
+    padding: 10px 5px 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .dates {
     display: flex;
     gap: 5%;

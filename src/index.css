@@ -23,4 +23,9 @@ h2 {
 p {
     font-size: 15px;
 }
+
+li {
+    font-size: 17px;
+    font-weight: bold;
+}
 /* fonts, fontsizng, font-elements in general */
