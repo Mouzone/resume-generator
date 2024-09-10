@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: white;
     gap: 20px;
+    height: 900px;
 }
 
 #personal,
