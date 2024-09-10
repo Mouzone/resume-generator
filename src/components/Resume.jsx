@@ -30,36 +30,73 @@ export default function Resume({ personal, education, experience }) {
             </div>
             <div id="education">
                 <h2> Education </h2>
-                <div className="items">
-                    <div className="item">
-                        <div className="left">
-                        <p> {education["start"]} - {education["end"]} </p>
-                            <p> {education["location"]} </p>
-                        </div>
-                        <div className="right">
-                            <p> {education["school"]} </p>
-                            <p> {education["degree"]} </p>
-                        </div>
-                    </div>
-
-                </div>
+                <Items
+                    isEducation={ true }
+                    state={ education }
+                ></Items>
             </div>
             <div id="experience">
                 <h2> Professional Experience </h2>
-                <div className="items">
-                    <div className="item">
-                        <div className="left">
-                            <p> {experience["start"]} - {experience["end"]} </p>
-                            <p> {experience["location"]} </p>
-                        </div>
-                        <div className={"right"}>
-                            <p> {experience["company"]} </p>
-                            <p> {experience["position"]} </p>
-                            <p> {experience["description"]} </p>
-                        </div>
-                    </div>
-                </div>
+                <Items
+                    isEducation={ false }
+                    state={ experience }
+                ></Items>
             </div>
+        </div>
+    )
+}
+
+function Items({ isEducation, state }) {
+    return (
+        <div className="items">
+            { state["show"].map(key => {
+                const item = state["items"][key]
+                return (
+                    <div key={ isEducation ? item["school"] : item["company"] } className="item">
+                        <Left start={ item["start"] }
+                              end={ item["end"] }
+                              location={ item["location"] }>
+                        </Left>
+                        { isEducation ?
+                            <EducationRight school={ item["school"]}
+                                            degree={ item["degree"]}>
+                            </EducationRight> :
+                            <ExperienceRight company={ item["company"]}
+                                position={ item["position"] }
+                                description={ item["description"]}
+                            ></ExperienceRight>
+                        }
+                    </div>
+                )
+            }) }
+        </div>
+    )
+}
+
+function Left({ start, end, location }) {
+    return (
+        <div className="left">
+            <p> { start } - { end } </p>
+            <p> { location } </p>
+        </div>
+    )
+}
+
+function EducationRight({ school, degree }) {
+    return (
+        <div className="right">
+            <p> { school } </p>
+            <p> { degree } </p>
+        </div>
+    )
+}
+
+function ExperienceRight({company, position, description}) {
+    return (
+        <div className={"right"}>
+            <p> {company} </p>
+            <p> {position} </p>
+            <p> { description } </p>
         </div>
     )
 }

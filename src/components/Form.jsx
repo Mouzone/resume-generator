@@ -1,8 +1,6 @@
 import "../styles/Form.css"
 import { useState } from "react";
-// todo: refactor Education & Experience to use ternary operator to reduce amount of shared code
-// -- call it Edit so it makes moving forward to list view easier
-// work on list view, with data structures and implement edit portion later
+// todo: work on list view, with data structures and implement edit portion later
 function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
@@ -76,7 +74,7 @@ function Personal({ state, setState }) {
     )
 }
 
-function Education({state, setState}) {
+function Education({ state, setState }) {
     const [ show, setShow ] = useState(false)
     function changeShow() {
         setShow(!show)
@@ -107,19 +105,25 @@ function Education({state, setState}) {
 
             </div>
             { show && (
-                <Edit
-                    isEducation={true}
-                    state={state}
-                    setState={setState}
-                >
-                </Edit>
+                <ul>
+                    { state["show"].map(
+                        key => <li key={key}> { state["items"][key]["school"] } </li>
+                    ) }
+                </ul>
+                // <Edit
+                //     isEducation={ true }
+                //     state={ state }
+                //     setState={ setState }
+                // >
+                // </Edit>
             )}
         </div>
     )
 }
 
 function Experience({state, setState}) {
-    const [ show, setShow ] = useState(false)
+    const [show, setShow] = useState(false)
+
     function changeShow() {
         setShow(!show)
     }
@@ -149,9 +153,9 @@ function Experience({state, setState}) {
             </div>
             { show && (
                 <Edit
-                    isEducation={false}
-                    state={state}
-                    setState={setState}
+                    isEducation={ false }
+                    state={ state }
+                    setState={ setState }
                 >
                 </Edit>
             )}
@@ -208,27 +212,27 @@ function Edit({ isEducation, state, setState }) {
             <div className="dates">
                 <Input
                     label="Start Date"
-                    value={state["start"]}
-                    handleChange={changeStart}
+                    value={ state["start"] }
+                    handleChange={ changeStart }
                 />
                 <Input
                     label="End Date"
-                    value={state["end"]}
-                    handleChange={changeEnd}
+                    value={ state["end"] }
+                    handleChange={ changeEnd }
                 />
             </div>
             <Input
                 label="Location"
-                value={state["location"]}
-                handleChange={changeLocation}
+                value={ state["location"] }
+                handleChange={ changeLocation }
             />
             { !isEducation && (
                 <label>
                     Description
                     {' '}
                     <textarea
-                        value={state["description"]}
-                        onChange={changeDescription}
+                        value={ state["description"] }
+                        onChange={ changeDescription }
                     />
                 </label>
             )}
@@ -236,17 +240,17 @@ function Edit({ isEducation, state, setState }) {
     )
 }
 
-function Input({label, value, handleChange}) {
+function Input({ label, value, handleChange }) {
     return (
         <label>
             {label}
             {' '}
             <input
-                value={value}
-                onChange={handleChange}
+                value={ value }
+                onChange={ handleChange }
             />
         </label>
     )
 }
 
-export {Personal, Education, Experience}
+export { Personal, Education, Experience }

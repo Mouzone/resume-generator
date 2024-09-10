@@ -10,21 +10,42 @@ function App() {
                                                                  email: "jeffteague@gmail.com",
                                                                  phone: "971-822-3334",
                                                                  address: "Indianapolis, Indiana "})
-    const [ education, setEducation ] = useState( { school: "Wake Forest",
-                                                                   degree: "Basketball",
-                                                                   start: "9/2007",
-                                                                   end: "5/2009",
-                                                                   location: "Winston-Salem, NC"
-    })
-    const [ experience, setExperience ] = useState({ company: "Atlanta Hawks",
-                                                                    position: "Point Guard",
-                                                                    start: "10/2009",
-                                                                    end: "7/2016",
-                                                                    location: "Atlanta, Georgia",
-                                                                    description: "1x All-Star, Playoffs every year, " +
-                                                                                 "4 conference semi-finals appearance, " +
-                                                                                 "1 conference finals appearance"
-    })
+    const [ education, setEducation ] = useState(
+        {
+                    show: [0, 1],
+                    items: {
+                        0: {
+                            school: "Pike High School",
+                            degree: "High School",
+                            start: "9/2003",
+                            end: "6/2007",
+                            location: "Indianapolis, IN"
+                        },
+                        1: {
+                            school: "Wake Forest",
+                            degree: "Basketball",
+                            start: "9/2007",
+                            end: "5/2009",
+                            location: "Winston-Salem, NC"
+                        }
+                    }
+                    })
+    const [ experience, setExperience ] = useState(
+        {
+                    show: [0],
+                    items: {
+                        0: {
+                            company: "Atlanta Hawks",
+                            position: "Point Guard",
+                            start: "10/2009",
+                            end: "7/2016",
+                            location: "Atlanta, Georgia",
+                            description: "1x All-Star, Playoffs every year, " +
+                                "4 conference semi-finals appearance, " +
+                                "1 conference finals appearance"
+                        }
+                    }
+                })
 
     // todo: for education and experience:
     // -- on dropdown show School / Company
