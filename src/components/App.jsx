@@ -2,10 +2,7 @@ import { useState } from 'react'
 import { Personal, Education, Experience } from "./Form.jsx";
 import Resume from "./Resume.jsx"
 import '../styles/App.css'
-// todo: change education and experience to a list/object to contain multiple objects
 function App() {
-    // todo: change education and experience to objects iwth a toShow() value that has keys
-    // -- then folows the keys to the value inside the object called items and shows it
     const [ personal, setPersonal ] = useState( { name: "Jeff Teague",
                                                                  email: "jeffteague@gmail.com",
                                                                  phone: "971-822-3334",
@@ -32,17 +29,74 @@ function App() {
                     })
     const [ experience, setExperience ] = useState(
         {
-                    show: [0],
+                    show: [0, 1, 6, 7],
                     items: {
                         0: {
                             company: "Atlanta Hawks",
                             position: "Point Guard",
-                            start: "10/2009",
+                            start: "7/2009",
                             end: "7/2016",
                             location: "Atlanta, Georgia",
-                            description: "1x All-Star, Playoffs every year, " +
+                            description: "1 All-Star appearance, " +
+                                "7 playoffs appearances, " +
                                 "4 conference semi-finals appearance, " +
                                 "1 conference finals appearance"
+                        },
+                        1: {
+                            company: "Indiana Pacers",
+                            position: "Point Guard",
+                            start: "7/2016",
+                            end: "7/2017",
+                            location: "Indianapolis, Indiana",
+                            description: "1 playoff appearance",
+                        },
+                        2: {
+                            company: "Minnesota Timberwolves",
+                            position: "Point Guard",
+                            start: "7/2017",
+                            end: "1/2020",
+                            location: "Minneapolis, Minnesota",
+                            description: "1 playoff appearance"
+                        },
+                        3: {
+                            company: "Atlanta Hawks",
+                            position: "Backup Point Guard",
+                            start: "1/2020",
+                            end: "7/2020",
+                            location: "Atlanta, Georgia",
+                            description: ""
+                        },
+                        4: {
+                            company: "Boston Celtics",
+                            position: "Backup Point Guard",
+                            start: "7/2020",
+                            end: "3/2021",
+                            location: "Boston, Massachusetts",
+                            description: ""
+                        },
+                        5: {
+                            company: "Milwaukee Bucks",
+                            position: "Backup Point Guard",
+                            start: "4/2021",
+                            end: "7/2021",
+                            location: "Milwaukee, Wisconsin",
+                            description: "1 NBA Championship"
+                        },
+                        6: {
+                            company: "Atlanta Hawks",
+                            position: "Regional Scout",
+                            start: "3/2022",
+                            end: "4/2023",
+                            location: "Atlanta, Georgia",
+                            description: ""
+                        },
+                        7: {
+                            company: "Pike High School",
+                            position: "Basketball Coach",
+                            start: "4/2023",
+                            end: "Present",
+                            location: "Indianapolis, Indiana",
+                            description: ""
                         }
                     }
                 })
