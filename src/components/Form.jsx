@@ -1,7 +1,8 @@
 import "../styles/Form.css"
+import { useState } from "react";
 // put toggles for each form section
 // todo: use loops instead of hardcoding each input
-function Personal({ state, setState, show }) {
+function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
     }
@@ -17,6 +18,8 @@ function Personal({ state, setState, show }) {
     function changeAddress(e) {
         setState({ ...state, address: e.target.value })
     }
+
+    const [ show, setShow ] = useState(false)
 
     if (show) {
         return (
@@ -64,7 +67,7 @@ function Personal({ state, setState, show }) {
     }
 }
 
-function Education({ state, setState, show }) {
+function Education({ state, setState }) {
     function changeSchool(e) {
         setState({ ...state, school: e.target.value })
     }
@@ -84,6 +87,8 @@ function Education({ state, setState, show }) {
     function changeLocation(e) {
         setState({ ...state, location: e.target.value })
     }
+
+    const [ show, setShow ] = useState(false)
 
     if (show) {
         return (
@@ -140,7 +145,7 @@ function Education({ state, setState, show }) {
 
 }
 
-function Experience({ state, setState, show }) {
+function Experience({ state, setState }) {
     function changeCompany(e) {
         setState({ ...state, company: e.target.value })
     }
@@ -164,6 +169,8 @@ function Experience({ state, setState, show }) {
     function changeDescription(e) {
         setState({ ...state, description: e.target.value })
     }
+
+    const [ show, setShow ] = useState(false)
 
     if (show) {
         return (

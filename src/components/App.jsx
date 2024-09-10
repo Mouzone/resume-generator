@@ -23,11 +23,6 @@ function App() {
                                                                                  "4 conference semi-finals appearance, " +
                                                                                  "1 conference finals appearance"
     })
-    const [ section_to_show, setSectionToShow ] = useState( "personal")
-
-    const show_personal = section_to_show === "personal"
-    const show_education = section_to_show === "education"
-    const show_experience = section_to_show === "experience"
 
     return (
         <>
@@ -35,17 +30,14 @@ function App() {
                 <Personal
                     state={ personal }
                     setState={ setPersonal }
-                    show={ show_personal }
                 />
                 <Education
                     state={ education }
                     setState={ setEducation }
-                    show={ show_education }
                 />
                 <Experience
                     state={ experience }
                     setState={ setExperience }
-                    show={ show_experience }
                 />
             </div>
             <Resume
