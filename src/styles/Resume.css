@@ -19,12 +19,22 @@
     background-color: lightsteelblue;
     padding: 30px 50px 30px 50px;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 #personalBar {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+}
+
+#personalBar p{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+svg {
+    width: 30px;
 }
 
 #resume h2 {

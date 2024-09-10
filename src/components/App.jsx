@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Personal, Education, Experience } from "./Form.jsx";
 import Resume from "./Resume.jsx"
 import '../styles/App.css'
-
+// todo: change education and experience to a list/object to contain multiple objects
 function App() {
     const [ personal, setPersonal ] = useState( { name: "Jeff Teague",
                                                                  email: "jeffteague@gmail.com",

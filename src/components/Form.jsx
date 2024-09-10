@@ -1,5 +1,6 @@
 import "../styles/Form.css"
-
+// todo: add groupings for h2 and icon
+// todo: use loops instead of hardcoding each input
 function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
