@@ -1,7 +1,8 @@
 import "../styles/Form.css"
 import { useState } from "react";
-// put toggles for each form section
-// todo: use loops instead of hardcoding each input
+// todo: refactor Education & Experience to use ternary operator to reduce amount of shared code
+// -- call it Edit so it makes moving forward to list view easier
+// work on list view, with data structures and implement edit portion later
 function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
@@ -76,26 +77,6 @@ function Personal({ state, setState }) {
 }
 
 function Education({state, setState}) {
-    function changeSchool(e) {
-        setState({...state, school: e.target.value})
-    }
-
-    function changeDegree(e) {
-        setState({...state, degree: e.target.value})
-    }
-
-    function changeStart(e) {
-        setState({...state, start: e.target.value})
-    }
-
-    function changeEnd(e) {
-        setState({...state, end: e.target.value})
-    }
-
-    function changeLocation(e) {
-        setState({...state, location: e.target.value})
-    }
-
     const [ show, setShow ] = useState(false)
     function changeShow() {
         setShow(!show)
@@ -126,65 +107,18 @@ function Education({state, setState}) {
 
             </div>
             { show && (
-                <div className="bottom">
-                    <Input
-                        label="School"
-                        value={state["school"]}
-                        handleChange={changeSchool}
-                    />
-                    <Input
-                        label="Degree"
-                        value={state["degree"]}
-                        handleChange={changeDegree}
-                    />
-                    <div className="dates">
-                        <Input
-                            label="Start"
-                            value={state["start"]}
-                            handleChange={changeStart}
-                        />
-                        <Input
-                            label="End"
-                            value={state["end"]}
-                            handleChange={changeEnd}
-                        />
-                    </div>
-                    <Input
-                        label="Location"
-                        value={state["location"]}
-                        handleChange={changeLocation}
-                    />
-                </div>
+                <Edit
+                    isEducation={true}
+                    state={state}
+                    setState={setState}
+                >
+                </Edit>
             )}
         </div>
     )
 }
 
 function Experience({state, setState}) {
-    function changeCompany(e) {
-        setState({...state, company: e.target.value})
-    }
-
-    function changePosition(e) {
-        setState({...state, position: e.target.value})
-    }
-
-    function changeStart(e) {
-        setState({...state, start: e.target.value})
-    }
-
-    function changeEnd(e) {
-        setState({...state, end: e.target.value})
-    }
-
-    function changeLocation(e) {
-        setState({...state, location: e.target.value})
-    }
-
-    function changeDescription(e) {
-        setState({...state, description: e.target.value})
-    }
-
     const [ show, setShow ] = useState(false)
     function changeShow() {
         setShow(!show)
@@ -214,47 +148,92 @@ function Experience({state, setState}) {
                 </button>
             </div>
             { show && (
-                <div className="bottom">
-                    <Input
-                        label="Company Name"
-                        value={state["company"]}
-                        handleChange={changeCompany}
-                    />
-                    <Input
-                        label="Position"
-                        value={state["position"]}
-                        handleChange={changePosition}
-                    />
-                    <div className="dates">
-                        <Input
-                            label="Start Date"
-                            value={state["start"]}
-                            handleChange={changeStart}
-                        />
-                        <Input
-                            label="End Date"
-                            value={state["end"]}
-                            handleChange={changeEnd}
-                        />
-                    </div>
-                    <Input
-                        label="Location"
-                        value={state["location"]}
-                        handleChange={changeLocation}
-                    />
-                    <label>
-                        Description
-                        {' '}
-                        <textarea
-                            value={state["description"]}
-                            onChange={changeDescription}
-                        />
-                    </label>
-                </div>
+                <Edit
+                    isEducation={false}
+                    state={state}
+                    setState={setState}
+                >
+                </Edit>
             )}
         </div>
     )
 
+}
+
+function Edit({ isEducation, state, setState }) {
+    function changeCompany(e) {
+        setState({...state, company: e.target.value})
+    }
+
+    function changeSchool(e) {
+        setState({...state, school: e.target.value})
+    }
+
+    function changePosition(e) {
+        setState({...state, position: e.target.value})
+    }
+
+    function changeDegree(e) {
+        setState({...state, degree: e.target.value})
+    }
+
+    function changeStart(e) {
+        setState({...state, start: e.target.value})
+    }
+
+    function changeEnd(e) {
+        setState({...state, end: e.target.value})
+    }
+
+    function changeLocation(e) {
+        setState({...state, location: e.target.value})
+    }
+
+    function changeDescription(e) {
+        setState({...state, description: e.target.value})
+    }
+
+    return (
+        <div className="bottom">
+            <Input
+                label={ isEducation ? "School" : "Company Name" }
+                value={ isEducation ? state["school"] : state["company"] }
+                handleChange={ isEducation ? changeCompany : changeSchool }
+            />
+            <Input
+                label={ isEducation ? "Degree" : "Position" }
+                value={ isEducation ? state["degree"] : state["position"] }
+                handleChange={ isEducation ? changeDegree : changePosition }
+            />
+            <div className="dates">
+                <Input
+                    label="Start Date"
+                    value={state["start"]}
+                    handleChange={changeStart}
+                />
+                <Input
+                    label="End Date"
+                    value={state["end"]}
+                    handleChange={changeEnd}
+                />
+            </div>
+            <Input
+                label="Location"
+                value={state["location"]}
+                handleChange={changeLocation}
+            />
+            { !isEducation && (
+                <label>
+                    Description
+                    {' '}
+                    <textarea
+                        value={state["description"]}
+                        onChange={changeDescription}
+                    />
+                </label>
+            )}
+        </div>
+    )
 }
 
 function Input({label, value, handleChange}) {
