@@ -52,7 +52,7 @@ function Items({ isEducation, state }) {
             { state["show"].map(key => {
                 const item = state["items"][key]
                 return (
-                    <div key={ isEducation ? item["school"] : item["company"] } className="item">
+                    <div key={ key } className="item">
                         <Left start={ item["start"] }
                               end={ item["end"] }
                               location={ item["location"] }>
