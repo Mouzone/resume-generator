@@ -1,5 +1,4 @@
 import "../styles/Resume.css"
-// todo: add groupings for h2 and icon
 export default function Resume({ personal, education, experience }) {
     return (
         <div id="resume">
