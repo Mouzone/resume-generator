@@ -3,6 +3,7 @@ import { Personal, Education, Experience } from "./Form.jsx";
 import Resume from "./Resume.jsx"
 import '../styles/App.css'
 function App() {
+    // todo: change strucutre to use crypto id and drag and drop ordering
     const [ personal, setPersonal ] = useState( { name: "Jeff Teague",
                                                                  email: "jeffteague@gmail.com",
                                                                  phone: "971-822-3334",

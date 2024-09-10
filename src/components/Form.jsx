@@ -34,13 +34,13 @@ function Personal({ state, setState }) {
                     Personal Details
                 </h2>
                 <button onClick={changeShow} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
-                    {show ? (
+                    { show ? (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,10L12,15L17,10H7Z"/>
+                                <path d="M7,15L12,10L17,15H7Z"/>
                             </svg>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,15L12,10L17,15H7Z"/>
+                                <path d="M7,10L12,15L17,10H7Z"/>
                             </svg>
                         )
                     }
@@ -76,8 +76,13 @@ function Personal({ state, setState }) {
 
 function Education({ state, setState }) {
     const [ show, setShow ] = useState(false)
+    const [ edit, setEdit ] = useState(null)
+
     function changeShow() {
         setShow(!show)
+    }
+    function changeEdit(key) {
+        setEdit(key)
     }
 
     function changeVisibility(key) {
@@ -105,17 +110,17 @@ function Education({ state, setState }) {
                 <button onClick={ changeShow } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                     { show ? (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,10L12,15L17,10H7Z"/>
+                                <path d="M7,15L12,10L17,15H7Z"/>
                             </svg>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,15L12,10L17,15H7Z"/>
+                                <path d="M7,10L12,15L17,10H7Z"/>
                             </svg>
                         )
                     }
                 </button>
             </div>
-            { show && (
+            {(show && (edit === null)) && (
                 <ul>
                     { state["items"].map(
                         (item, i) => <Object
@@ -123,15 +128,20 @@ function Education({ state, setState }) {
                             item={ item }
                             handleChange={ () => changeVisibility(i) }
                             showIcon={ state["show"].includes(i) }
+                            handleEdit={ () => changeEdit(i)}
                         ></Object>
                     ) }
                 </ul>
-                // <Edit
-                //     isEducation={ true }
-                //     state={ state }
-                //     setState={ setState }
-                // >
-                // </Edit>
+            )}
+
+            {(show && (edit !== null)) && (
+                <Edit
+                    isEducation={ true }
+                    state={ state["items"][edit] }
+                    key={ edit }
+                    setState={ setState }
+                >
+                </Edit>
             )}
         </div>
     )
@@ -157,11 +167,11 @@ function Experience({state, setState}) {
                 <button onClick={changeShow} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                     { show ? (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,10L12,15L17,10H7Z"/>
+                                <path d="M7,15L12,10L17,15H7Z"/>
                             </svg>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,15L12,10L17,15H7Z"/>
+                                <path d="M7,10L12,15L17,10H7Z"/>
                             </svg>
                         )
                     }
@@ -252,17 +262,20 @@ function Edit({ isEducation, state, setState }) {
                     />
                 </label>
             )}
+            <div className="buttons">
+                <button> Cancel </button>
+                <button> Save </button>
+            </div>
         </div>
+    //     modify button's onChange to log in the changes after submission, just submit the old object
+        // since it will jsut log whatever is put in last
     )
 }
 
-//todo: modifyh the clickability of the obejct
-// takes state object form Education or Experience then upon selecting one of the elments
-// will display the edit form to edit the proper thing...?
-function Object({ key, item, handleChange, showIcon }) {
+function Object({ key, item, handleChange, showIcon, handleEdit }) {
     return (
         <li key={key}>
-            {item["school"]}
+            <h3 onClick={handleEdit}> { item["school"] } </h3>
             <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                 { showIcon ? (
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
