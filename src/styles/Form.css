@@ -45,6 +45,11 @@ li {
     justify-content: space-between;
 }
 
+.objectButtons {
+    display: flex;
+    gap: 10px;
+}
+
 .dates {
     display: flex;
     gap: 5%;
