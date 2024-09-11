@@ -1,4 +1,3 @@
-// todo: push onto web
 // todo: REFACTORING!!
 import { useState } from 'react'
 import { Personal, Education, Experience } from "./Form.jsx";
@@ -111,7 +110,7 @@ function App() {
                         }
                     }
         })
-    const [ originals, setOriginal ] = useState( {
+    const [ originals, _ ] = useState( {
                                                                     personal:personal,
                                                                     education: education,
                                                                     experience: experience

@@ -30,71 +30,67 @@ export default function Resume({ personal, education, experience }) {
             </div>
 
             {(education["show"].length) > 0 &&
-                <div id="education">
-                    <h2> Education </h2>
                     <Items
                         isEducation={true}
-                        state={education}
-                    ></Items>
-                </div>
+                        state={education}>
+                    </Items>
             }
 
             {(experience["show"].length) > 0 &&
-                <div id="experience">
-                    <h2> Professional Experience </h2>
-                    <Items
-                        isEducation={false}
-                        state={experience}
-                    ></Items>
-                </div>
+                <Items
+                    isEducation={false}
+                    state={experience}>
+                </Items>
             }
-
         </div>
     )
 }
 
 function Items({isEducation, state }) {
     return (
-        <div className="items">
-            { Object.entries(state["items"]).map(([key, item]) => {
-                if (state["show"].includes(key)) {
-                    return (
-                        <div key={ key } className="item">
-                            <Left start={ item["start"] }
-                                  end={ item["end"] }
-                                  location={ item["location"] }>
-                            </Left>
-                            { isEducation ?
-                                <EducationRight school={ item["school"]}
-                                                degree={ item["degree"]}>
-                                </EducationRight> :
-                                <ExperienceRight company={ item["company"]}
-                                                 position={ item["position"] }
-                                                 description={ item["description"]}
-                                ></ExperienceRight>
-                            }
-                        </div>
-                    )
-                }
-            })}
+        <div id={isEducation ? "education" : "experience"}>
+            <h2> {isEducation ? "Education" : "Professional Experience"}</h2>
+            <div className="items">
+                {Object.entries(state["items"]).map(([key, item]) => {
+                    if (state["show"].includes(key)) {
+                        return (
+                            <div key={key} className="item">
+                                <Left start={item["start"]}
+                                      end={item["end"]}
+                                      location={item["location"]}>
+                                </Left>
+                                {isEducation ?
+                                    <EducationRight school={item["school"]}
+                                                    degree={item["degree"]}>
+                                    </EducationRight> :
+                                    <ExperienceRight company={item["company"]}
+                                                     position={item["position"]}
+                                                     description={item["description"]}
+                                    ></ExperienceRight>
+                                }
+                            </div>
+                        )
+                    }
+                })}
+            </div>
         </div>
     )
 }
 
-function Left({ start, end, location }) {
+function Left({start, end, location}) {
     return (
         <div className="left">
-            <p> { start } - { end } </p>
-            <p> { location } </p>
+            <p> {start} - {end} </p>
+            <p> {location} </p>
         </div>
     )
 }
 
-function EducationRight({ school, degree }) {
+function EducationRight({school, degree}) {
     return (
         <div className="right">
-            <p> { school } </p>
-            <p> { degree } </p>
+            <p> {school} </p>
+            <p> {degree} </p>
         </div>
     )
 }
@@ -104,7 +100,7 @@ function ExperienceRight({company, position, description}) {
         <div className={"right"}>
             <p> {company} </p>
             <p> {position} </p>
-            <p> { description } </p>
+            <p> {description} </p>
         </div>
     )
 }
