@@ -9,7 +9,7 @@ function Personal({ state, setState }) {
     }
     function curryChange(key){
         return (e) => {
-            setState({ ...state, [key]: e.target.value })
+            setState({ ...state, [ key ]: e.target.value })
         }
     }
 
@@ -30,7 +30,7 @@ function Personal({ state, setState }) {
                     </svg>
                     Personal Details
                 </h2>
-                <button onClick={changeShow} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
+                <button onClick={ changeShow } style={ { background: 'none', border: 'none', cursor: 'pointer' } }>
                     { show ? (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M7,15L12,10L17,15H7Z"/>
@@ -45,7 +45,7 @@ function Personal({ state, setState }) {
             </div>
             { show && (
                 <div className="bottom">
-                    { Object.entries(state).map(([key, value]) => {
+                    { Object.entries(state).map(([ key, value ]) => {
                         return <Input
                             label={ labels_for_value[key] }
                             value={ value }
@@ -58,8 +58,8 @@ function Personal({ state, setState }) {
 }
 
 function StandardInputs({ isEducation, state, setState }) {
-    const [show, setShow] = useState(false)
-    const [edit, setEdit] = useState(null)
+    const [ show, setShow ] = useState(false)
+    const [ edit, setEdit ] = useState(null)
 
     function changeShow() {
         setShow(!show)
@@ -70,11 +70,11 @@ function StandardInputs({ isEducation, state, setState }) {
     }
 
     function changeVisibility(key){
-        const old_show = state["show"]
+        const old_show = state[ "show" ]
         const new_show = old_show.includes(key)
             ? old_show.filter(item => item !== key)
-            : [...old_show, key]
-        setState({...state, show: new_show})
+            : [ ...old_show, key ]
+        setState({ ...state, show: new_show })
     }
 
     function createNew() {
@@ -83,9 +83,9 @@ function StandardInputs({ isEducation, state, setState }) {
             ? { company: "", position: "", start: "", end: "", location: "", description: "" }
             : { school: "", degree: "", start: "", end: "", location: "" }
 
-        const new_items = { ...state["items"], [new_key]: new_item }
+        const new_items = { ...state[ "items" ], [ new_key ]: new_item }
 
-        setState({ show: [...state["show"], new_key], items: new_items })
+        setState({ show: [ ...state[ "show" ], new_key ], items: new_items })
         changeEdit(new_key)
     }
 
@@ -115,7 +115,7 @@ function StandardInputs({ isEducation, state, setState }) {
             { (show && (edit === null)) && (
                 <div className="bottom">
                     <ul>
-                        {Object.entries(state["items"]).map(([item_id, item]) =>
+                        { Object.entries(state[ "items" ]).map(([ item_id, item ]) =>
                             <ObjectElement
                                 isEducation={ isEducation }
                                 key={ item_id }
@@ -124,7 +124,7 @@ function StandardInputs({ isEducation, state, setState }) {
                                 showIcon={ state["show"].includes(item_id) }
                                 handleEdit={ () => changeEdit(item_id) }
                             />
-                        )}
+                        ) }
                     </ul>
                     <button onClick={ createNew } style={ { background: 'none', border: 'none', cursor: 'pointer' } }
                             className="newItem">
@@ -148,7 +148,7 @@ function StandardInputs({ isEducation, state, setState }) {
     )
 }
 
-function Edit({isEducation, state, setState, to_edit, setEdit}) {
+function Edit({ isEducation, state, setState, to_edit, setEdit }) {
 
     const [ original, _ ] = useState(state)
 
@@ -156,10 +156,10 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
     function curryChange(key) {
         return (e) => {
             const updatedItems = {
-                ...state["items"],
-                [to_edit]: {
-                    ...state["items"][to_edit],
-                    [key]: e.target.value
+                ...state[ "items" ],
+                [ to_edit ]: {
+                    ...state[ "items" ][ to_edit ],
+                    [ key ]: e.target.value
                 }
             }
             setState({ ...state, items: updatedItems })
@@ -171,10 +171,10 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
     }
 
     function cancelChange() {
-        if (original["show"][original["show"].length - 1] === to_edit) {
-            if (Object.values(original["items"][to_edit]).every(value => value === "")) {
-                delete original["items"][to_edit]
-                original["show"].pop()
+        if (original[ "show" ][ original[ "show" ].length - 1 ] === to_edit) {
+            if (Object.values(original[ "items" ][ to_edit ]).every(value => value === "")) {
+                delete original[ "items" ][ to_edit ]
+                original[ "show" ].pop()
             }
         }
         exit()
@@ -185,40 +185,40 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
         <div className="bottom">
             <Input
                 label={ isEducation ? "School" : "Company Name" }
-                value={ isEducation ? state["items"][to_edit]["school"] : state["items"][to_edit]["company"] }
+                value={ isEducation ? state[ "items" ][ to_edit ][ "school" ] : state[ "items" ][ to_edit ][ "company" ] }
                 handleChange={ isEducation ? curryChange("school") : curryChange("company") }
             />
             <Input
                 label={ isEducation ? "Degree" : "Position" }
-                value={ isEducation ? state["items"][to_edit]["degree"] : state["items"][to_edit]["position"] }
+                value={ isEducation ? state[ "items" ][ to_edit ][ "degree" ] : state[ "items" ][ to_edit ][ "position" ] }
                 handleChange={ isEducation ? curryChange("degree") : curryChange("position") }
             />
             <div className="dates">
                 <Input
                     label="Start Date"
-                    value={ state["items"][to_edit]["start"] }
+                    value={ state[ "items" ][ to_edit ][ "start" ] }
                     handleChange={ curryChange("start") }
                 />
                 <Input
                     label="End Date"
-                    value={ state["items"][to_edit]["end"] }
+                    value={ state[ "items" ] [to_edit ][ "end" ] }
                     handleChange={ curryChange("end") }
                 />
             </div>
             <Input
                 label="Location"
-                value={ state["items"][to_edit]["location"] }
+                value={ state[ "items" ][ to_edit ][ "location" ] }
                 handleChange={ curryChange("location") }
             />
             { !isEducation && (
                 <label>
                     Description
                     <textarea
-                        value={ state["items"][to_edit]["description"] }
+                        value={ state[ "items" ][ to_edit ][ "description" ] }
                         onChange={ curryChange("description") }
                     />
                 </label>
-            )}
+            ) }
             <div className="buttons">
                 <button onClick={ cancelChange } style={ { cursor: "pointer" } }> Cancel </button>
                 <button onClick={ exit } style={ { cursor: "pointer" } }> Save </button>
@@ -231,9 +231,9 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
 // todo: edge case when company name isn't put in the edit component is not selectable for that object
 function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit }) {
     return (
-        <li key={id}>
-            <h3 onClick={ handleEdit } style={ { cursor: "pointer" } }> { isEducation ? item["school"] : item["company"] }  </h3>
-            <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
+        <li key={ id }>
+            <h3 onClick={ handleEdit } style={ { cursor: "pointer" } }> { isEducation ? item[ "school" ] : item[ "company" ] }  </h3>
+            <button onClick={ handleChange } style={ { background: 'none', border: 'none', cursor: 'pointer' } }>
                 { showIcon ? (
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
@@ -244,13 +244,13 @@ function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEd
                             <path
                                 d="M2.54,4.71L3.25,4L20,20.75L19.29,21.46L15.95,18.11C14.58,18.68 13.08,19 11.5,19C6.94,19 3,16.35 1.14,12.5C2.11,10.5 3.63,8.83 5.5,7.68L2.54,4.71M11.5,18C12.79,18 14.03,17.77 15.17,17.34L14.05,16.21C13.32,16.71 12.45,17 11.5,17C9,17 7,15 7,12.5C7,11.55 7.29,10.68 7.79,9.95L6.24,8.41C4.57,9.38 3.19,10.8 2.26,12.5C4.04,15.78 7.5,18 11.5,18M20.74,12.5C18.96,9.22 15.5,7 11.5,7C10.35,7 9.23,7.19 8.19,7.53L7.41,6.75C8.68,6.26 10.06,6 11.5,6C16.06,6 20,8.65 21.86,12.5C20.95,14.39 19.53,16 17.79,17.13L17.07,16.4C18.6,15.44 19.87,14.1 20.74,12.5M11.5,8C14,8 16,10 16,12.5C16,13.32 15.78,14.08 15.4,14.74L14.66,14C14.88,13.54 15,13.04 15,12.5C15,10.57 13.43,9 11.5,9C10.96,9 10.46,9.12 10,9.34L9.26,8.6C9.92,8.22 10.68,8 11.5,8M8,12.5C8,14.43 9.57,16 11.5,16C12.17,16 12.79,15.81 13.32,15.5L8.5,10.68C8.19,11.21 8,11.83 8,12.5Z"/>
                         </svg>
-                )}
+                ) }
             </button>
         </li>
     )
 }
 
-function Input({label, value, handleChange}) {
+function Input({ label, value, handleChange }) {
     return (
         <label>
             { label }
@@ -262,4 +262,4 @@ function Input({label, value, handleChange}) {
     )
 }
 
-export {Personal, StandardInputs }
+export { Personal, StandardInputs }

@@ -7,7 +7,7 @@ function App() {
     const [ personal, setPersonal ] = useState( { name: "Jeff Teague",
                                                                  email: "jeffteague@gmail.com",
                                                                  phone: "971-822-3334",
-                                                                 address: "Indianapolis, Indiana "})
+                                                                 address: "Indianapolis, Indiana " })
     const first = crypto.randomUUID()
     const second = crypto.randomUUID()
     const third = crypto.randomUUID()
@@ -18,16 +18,16 @@ function App() {
     const eighth = crypto.randomUUID()
     const [ education, setEducation ] = useState(
         {
-                    show: [first, second],
+                    show: [ first, second ],
                     items: {
-                        [first]: {
+                        [ first ]: {
                             school: "Pike High School",
                             degree: "High School",
                             start: "9/2003",
                             end: "6/2007",
                             location: "Indianapolis, IN"
                         },
-                        [second]: {
+                        [ second ]: {
                             school: "Wake Forest",
                             degree: "Basketball",
                             start: "9/2007",
@@ -38,9 +38,9 @@ function App() {
         })
     const [ experience, setExperience ] = useState(
         {
-                    show: [first, second, seventh, eighth],
+                    show: [ first, second, seventh, eighth ],
                     items: {
-                        [first]: {
+                        [ first ]: {
                             company: "Atlanta Hawks",
                             position: "Point Guard",
                             start: "7/2009",
@@ -51,7 +51,7 @@ function App() {
                                 "4 conference semi-finals appearance, " +
                                 "1 conference finals appearance"
                         },
-                        [second]: {
+                        [ second ]: {
                             company: "Indiana Pacers",
                             position: "Point Guard",
                             start: "7/2016",
@@ -59,7 +59,7 @@ function App() {
                             location: "Indianapolis, Indiana",
                             description: "1 playoff appearance",
                         },
-                        [third]: {
+                        [ third ]: {
                             company: "Minnesota Timberwolves",
                             position: "Point Guard",
                             start: "7/2017",
@@ -67,7 +67,7 @@ function App() {
                             location: "Minneapolis, Minnesota",
                             description: "1 playoff appearance"
                         },
-                        [fourth]: {
+                        [ fourth ]: {
                             company: "Atlanta Hawks",
                             position: "Backup Point Guard",
                             start: "1/2020",
@@ -75,7 +75,7 @@ function App() {
                             location: "Atlanta, Georgia",
                             description: ""
                         },
-                        [fifth]: {
+                        [ fifth ]: {
                             company: "Boston Celtics",
                             position: "Backup Point Guard",
                             start: "7/2020",
@@ -83,7 +83,7 @@ function App() {
                             location: "Boston, Massachusetts",
                             description: ""
                         },
-                        [sixth]: {
+                        [ sixth ]: {
                             company: "Milwaukee Bucks",
                             position: "Backup Point Guard",
                             start: "4/2021",
@@ -91,7 +91,7 @@ function App() {
                             location: "Milwaukee, Wisconsin",
                             description: "1 NBA Championship"
                         },
-                        [seventh]: {
+                        [ seventh ]: {
                             company: "Atlanta Hawks",
                             position: "Regional Scout",
                             start: "3/2022",
@@ -99,7 +99,7 @@ function App() {
                             location: "Atlanta, Georgia",
                             description: ""
                         },
-                        [eighth]: {
+                        [ eighth ]: {
                             company: "Pike High School",
                             position: "Basketball Coach",
                             start: "4/2023",
@@ -110,10 +110,10 @@ function App() {
                     }
         })
     const [ originals, _ ] = useState( {
-                                                                    personal:personal,
-                                                                    education: education,
-                                                                    experience: experience
-                                                                })
+                                                        personal:personal,
+                                                        education: education,
+                                                        experience: experience
+                                                        })
 
     function clear() {
         setPersonal({ name: "", email: "", phone: "", address: "" })

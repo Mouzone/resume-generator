@@ -51,9 +51,8 @@ function Items({ isEducation, state }) {
         <div id={ isEducation ? "education" : "experience" }>
             <h2> { isEducation ? "Education" : "Professional Experience" }</h2>
             <div className="items">
-                {Object.entries(state["items"]).map(([ key, item ]) => {
-                    if (state["show"].includes(key)) {
-                        return (
+                { Object.entries(state["items"]).map(([ key, item ]) => {
+                        return (state["show"].includes(key)) && (
                             <div key={ key } className="item">
                                 <Left start={ item["start"] }
                                       end={ item["end"] }
@@ -69,9 +68,8 @@ function Items({ isEducation, state }) {
                                     />
                                 }
                             </div>
-                        )
-                    }
-                })}
+                        ) }
+                ) }
             </div>
         </div>
     )
