@@ -107,7 +107,7 @@ function Education({ state, setState }) {
                 location: ""
             }
         }
-        setState({ ...state, show: [...state["show"], new_key], items: new_items})
+        setState({ show: [...state["show"], new_key], items: new_items })
         changeEdit(new_key)
     }
 
@@ -148,7 +148,7 @@ function Education({ state, setState }) {
                             </ObjectElement>
                         )}
                     </ul>
-                    <button onClick={ createNew } style={{background: 'none', border: 'none', cursor: 'pointer'}} className="newItem">
+                    <button onClick={ createNew } style={ { background: 'none', border: 'none', cursor: 'pointer' } } className="newItem">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
                         </svg>
@@ -193,6 +193,23 @@ function Experience({state, setState}) {
         setState({...state, show: new_show})
     }
 
+    function createNew() {
+        const new_key = crypto.randomUUID()
+        const new_items = {
+            ...state["items"],
+            [new_key]: {
+                company: "",
+                position: "",
+                start: "",
+                end: "",
+                location: "",
+                description: ""
+            }
+        }
+        setState({ show: [...state["show"], new_key], items: new_items })
+        changeEdit(new_key)
+    }
+
     return (
         <div id="experienceInput">
             <div className="top">
@@ -217,35 +234,43 @@ function Experience({state, setState}) {
                 </button>
             </div>
             { (show && (edit === null)) && (
-                <ul>
-                    { Object.entries(state["items"]).map(([item_id, item]) =>
-                        <ObjectElement
-                            isEducation={ false }
-                            key={ item_id }
-                            item={ item }
-                            handleChange={ () => changeVisibility(item_id) }
-                            showIcon={ state["show"].includes(item_id) }
-                            handleEdit={ () => changeEdit(item_id) }>
-                        </ObjectElement>
-                    ) }
-                </ul>
+                <div className="bottom">
+                    <ul>
+                        {Object.entries(state["items"]).map(([item_id, item]) =>
+                            <ObjectElement
+                                isEducation={false}
+                                key={item_id}
+                                item={item}
+                                handleChange={() => changeVisibility(item_id)}
+                                showIcon={state["show"].includes(item_id)}
+                                handleEdit={() => changeEdit(item_id)}>
+                            </ObjectElement>
+                        )}
+                    </ul>
+                    <button onClick={createNew} style={{background: 'none', border: 'none', cursor: 'pointer'}}
+                            className="newItem">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                        </svg>
+                    </button>
+                </div>
             )}
 
-            { (show && (edit !== null)) && (
+            {(show && (edit !== null)) && (
                 <Edit
-                    isEducation={ false }
-                    state={ state }
-                    setState={ setState }
-                    to_edit={ edit }
-                    setEdit={ setEdit }>
+                    isEducation={false}
+                    state={state}
+                    setState={setState}
+                    to_edit={edit}
+                    setEdit={setEdit}>
                 </Edit>
-            ) }
+            )}
         </div>
     )
 
 }
 
-function Edit({ isEducation, state, setState, to_edit, setEdit }) {
+function Edit({isEducation, state, setState, to_edit, setEdit}) {
     function changeCompany(e) {
         const updatedItems = {
             ...state["items"],
