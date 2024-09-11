@@ -91,8 +91,7 @@ function Education({ state, setState }) {
         if (old_show.includes(key)) {
             new_show = old_show.filter(item => item !== key)
         } else {
-            old_show.push(key)
-            new_show = old_show.toSorted()
+            new_show = [...old_show, key]
         }
         setState({ ...state, show: new_show })
     }
@@ -122,14 +121,14 @@ function Education({ state, setState }) {
             </div>
             {(show && (edit === null)) && (
                 <ul>
-                    { state["items"].map(
-                        (item, i) => <Object
-                            key={ i }
+                    { Object.entries(state["items"]).map(([item_id, item]) =>
+                        <ObjectElement
+                            key={ item_id }
                             item={ item }
-                            handleChange={ () => changeVisibility(i) }
-                            showIcon={ state["show"].includes(i) }
-                            handleEdit={ () => changeEdit(i)}
-                        ></Object>
+                            handleChange={ () => changeVisibility(item_id) }
+                            showIcon={ state["show"].includes(item_id) }
+                            handleEdit={ () => changeEdit(item_id)}>
+                        </ObjectElement>
                     ) }
                 </ul>
             )}
@@ -137,14 +136,15 @@ function Education({ state, setState }) {
             {(show && (edit !== null)) && (
                 <Edit
                     isEducation={ true }
-                    state={ state["items"][edit] }
-                    key={ edit }
+                    state={ state }
                     setState={ setState }
-                >
+                    to_edit={ edit }
+                    setEdit={ setEdit }>
                 </Edit>
             )}
         </div>
     )
+//     todo: after <ul> add button that adds a new item with new index with empty fields
 }
 
 function Experience({state, setState}) {
@@ -190,66 +190,132 @@ function Experience({state, setState}) {
 
 }
 
-function Edit({ isEducation, state, setState }) {
+function Edit({ isEducation, state, setState, to_edit, setEdit }) {
     function changeCompany(e) {
-        setState({...state, company: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                company: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeSchool(e) {
-        setState({...state, school: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                school: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changePosition(e) {
-        setState({...state, position: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                position: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeDegree(e) {
-        setState({...state, degree: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                degree: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeStart(e) {
-        setState({...state, start: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                start: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeEnd(e) {
-        setState({...state, end: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                end: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeLocation(e) {
-        setState({...state, location: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                location: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
     function changeDescription(e) {
-        setState({...state, description: e.target.value})
+        const updatedItems = {
+            ...state["items"],
+            [to_edit]: {
+                ...state["items"][to_edit],
+                description: e.target.value
+            }
+        }
+        setState({...state, items: updatedItems})
     }
 
+    const [ original, setOriginal ] = useState(state)
+    function exit() {
+        setEdit(null)
+    }
+
+    function cancelChange() {
+        setState(original)
+        exit()
+    }
+    // school is not editable for some reason
     return (
         <div className="bottom">
             <Input
                 label={ isEducation ? "School" : "Company Name" }
-                value={ isEducation ? state["school"] : state["company"] }
+                value={ isEducation ? state["items"][to_edit]["school"] : state["items"][to_edit]["company"] }
                 handleChange={ isEducation ? changeCompany : changeSchool }
             />
             <Input
                 label={ isEducation ? "Degree" : "Position" }
-                value={ isEducation ? state["degree"] : state["position"] }
+                value={ isEducation ? state["items"][to_edit]["degree"] : state["items"][to_edit]["position"] }
                 handleChange={ isEducation ? changeDegree : changePosition }
             />
             <div className="dates">
                 <Input
                     label="Start Date"
-                    value={ state["start"] }
+                    value={ state["items"][to_edit]["start"] }
                     handleChange={ changeStart }
                 />
                 <Input
                     label="End Date"
-                    value={ state["end"] }
+                    value={ state["items"][to_edit]["end"] }
                     handleChange={ changeEnd }
                 />
             </div>
             <Input
                 label="Location"
-                value={ state["location"] }
+                value={ state["items"][to_edit]["location"] }
                 handleChange={ changeLocation }
             />
             { !isEducation && (
@@ -257,24 +323,23 @@ function Edit({ isEducation, state, setState }) {
                     Description
                     {' '}
                     <textarea
-                        value={ state["description"] }
+                        value={ state["items"][to_edit]["description"] }
                         onChange={ changeDescription }
                     />
                 </label>
             )}
             <div className="buttons">
-                <button> Cancel </button>
-                <button> Save </button>
+                <button onClick={cancelChange} style={{cursor: "pointer"}}> Cancel </button>
+                <button onClick={exit}> Save </button>
             </div>
         </div>
-    //     modify button's onChange to log in the changes after submission, just submit the old object
-        // since it will jsut log whatever is put in last
+    // todo: Cancel is sending the state, but it is the current state, since state is updated after each character is typed
     )
 }
 
-function Object({ key, item, handleChange, showIcon, handleEdit }) {
+function ObjectElement({ id, item, handleChange, showIcon, handleEdit }) {
     return (
-        <li key={key}>
+        <li key={id}>
             <h3 onClick={handleEdit}> { item["school"] } </h3>
             <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                 { showIcon ? (
