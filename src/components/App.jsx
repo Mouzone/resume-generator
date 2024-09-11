@@ -1,6 +1,6 @@
 // todo: REFACTORING!!
 import { useState } from 'react'
-import { Personal, Education, Experience } from "./Form.jsx";
+import { Personal, StandardInputs } from "./Form.jsx";
 import Resume from "./Resume.jsx"
 import '../styles/App.css'
 function App() {
@@ -136,13 +136,15 @@ function App() {
                     state={personal}
                     setState={setPersonal}
                 />
-                <Education
-                    state={education}
-                    setState={setEducation}
+                <StandardInputs
+                    isEducation={ true }
+                    state={ education }
+                    setState={ setEducation }
                 />
-                <Experience
-                    state={experience}
-                    setState={setExperience}
+                <StandardInputs
+                    isEducation={ false }
+                    state={ experience }
+                    setState={ setExperience }
                 />
                 <div className="template-buttons">
                     <button onClick={clear} style={{cursor: "pointer"}}>

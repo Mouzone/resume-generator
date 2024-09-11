@@ -57,103 +57,7 @@ function Personal({ state, setState }) {
     )
 }
 
-function Education({ state, setState }) {
-    const [ show, setShow ] = useState(false)
-    const [ edit, setEdit ] = useState(null)
-
-    function changeShow() {
-        setShow(!show)
-    }
-    function changeEdit(key) {
-        setEdit(key)
-    }
-
-    function changeVisibility(key) {
-        let new_show
-        const old_show = state["show"]
-        if (old_show.includes(key)) {
-            new_show = old_show.filter(item => item !== key)
-        } else {
-            new_show = [...old_show, key]
-        }
-        setState({ ...state, show: new_show })
-    }
-
-    function createNew() {
-        const new_key = crypto.randomUUID()
-        const new_items = {
-            ...state["items"],
-            [new_key]: {
-                school: "",
-                degree: "",
-                start: "",
-                end: "",
-                location: ""
-            }
-        }
-        setState({ show: [...state["show"], new_key], items: new_items })
-        changeEdit(new_key)
-    }
-
-    return (
-        <div id="educationInput">
-            <div className="top">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                            d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3M18.82 9L12 12.72L5.18 9L12 5.28L18.82 9M17 16L12 18.72L7 16V12.27L12 15L17 12.27V16Z"/>
-                    </svg>
-                    Education
-                </h2>
-                <button onClick={ changeShow } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
-                    { show ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,15L12,10L17,15H7Z"/>
-                            </svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M7,10L12,15L17,10H7Z"/>
-                            </svg>
-                        )
-                    }
-                </button>
-            </div>
-            { (show && (edit === null)) && (
-                <div className="bottom">
-                    <ul>
-                        {Object.entries(state["items"]).map(([item_id, item]) =>
-                            <ObjectElement
-                                isEducation={true}
-                                key={item_id}
-                                item={item}
-                                handleChange={() => changeVisibility(item_id)}
-                                showIcon={state["show"].includes(item_id)}
-                                handleEdit={() => changeEdit(item_id)}>
-                            </ObjectElement>
-                        )}
-                    </ul>
-                    <button onClick={ createNew } style={ { background: 'none', border: 'none', cursor: 'pointer' } } className="newItem">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
-                        </svg>
-                    </button>
-                </div>
-            )}
-
-            {(show && (edit !== null)) && (
-                <Edit
-                    isEducation={true}
-                    state={state}
-                    setState={setState}
-                    to_edit={edit}
-                    setEdit={setEdit}>
-                </Edit>
-            )}
-        </div>
-    )
-}
-
-function Experience({state, setState}) {
+function StandardInputs({ isEducation, state, setState }) {
     const [show, setShow] = useState(false)
     const [edit, setEdit] = useState(null)
 
@@ -166,42 +70,34 @@ function Experience({state, setState}) {
     }
 
     function changeVisibility(key){
-        let new_show
         const old_show = state["show"]
-        if (old_show.includes(key)) {
-            new_show = old_show.filter(item => item !== key)
-        } else {
-            new_show = [...old_show, key]
-        }
+        const new_show = old_show.includes(key)
+            ? old_show.filter(item => item !== key)
+            : [...old_show, key]
         setState({...state, show: new_show})
     }
 
     function createNew() {
-        const new_key = crypto.randomUUID()
-        const new_items = {
-            ...state["items"],
-            [new_key]: {
-                company: "",
-                position: "",
-                start: "",
-                end: "",
-                location: "",
-                description: ""
-            }
-        }
+        const new_key = crypto.randomUUID();
+        const new_item = isEducation
+            ? { company: "", position: "", start: "", end: "", location: "", description: "" }
+            : { school: "", degree: "", start: "", end: "", location: "" }
+
+        const new_items = { ...state["items"], [new_key]: new_item }
+
         setState({ show: [...state["show"], new_key], items: new_items })
         changeEdit(new_key)
     }
 
     return (
-        <div id="experienceInput">
+        <div id={ isEducation ? "educationInput" : "experienceInput" }>
             <div className="top">
                 <h2>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path
                             d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z"/>
                     </svg>
-                    Professional Experience
+                    { isEducation ? "Education" : "Professional Experience"}
                 </h2>
                 <button onClick={ changeShow } style={ { background: 'none', border: 'none', cursor: 'pointer' } }>
                     { show ? (
@@ -221,16 +117,16 @@ function Experience({state, setState}) {
                     <ul>
                         {Object.entries(state["items"]).map(([item_id, item]) =>
                             <ObjectElement
-                                isEducation={false}
-                                key={item_id}
-                                item={item}
-                                handleChange={() => changeVisibility(item_id)}
-                                showIcon={state["show"].includes(item_id)}
-                                handleEdit={() => changeEdit(item_id)}>
+                                isEducation={ isEducation }
+                                key={ item_id }
+                                item={ item }
+                                handleChange={ () => changeVisibility(item_id) }
+                                showIcon={ state["show"].includes(item_id) }
+                                handleEdit={ () => changeEdit(item_id) }>
                             </ObjectElement>
                         )}
                     </ul>
-                    <button onClick={createNew} style={{background: 'none', border: 'none', cursor: 'pointer'}}
+                    <button onClick={ createNew } style={ { background: 'none', border: 'none', cursor: 'pointer' } }
                             className="newItem">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
@@ -241,11 +137,11 @@ function Experience({state, setState}) {
 
             {(show && (edit !== null)) && (
                 <Edit
-                    isEducation={false}
-                    state={state}
-                    setState={setState}
-                    to_edit={edit}
-                    setEdit={setEdit}>
+                    isEducation={ isEducation }
+                    state={ state }
+                    setState={ setState }
+                    to_edit={ edit }
+                    setEdit={ setEdit }>
                 </Edit>
             )}
         </div>
@@ -440,4 +336,4 @@ function Input({label, value, handleChange}) {
     )
 }
 
-export {Personal, Education, Experience}
+export {Personal, StandardInputs }
