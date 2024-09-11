@@ -149,99 +149,27 @@ function StandardInputs({ isEducation, state, setState }) {
 }
 
 function Edit({isEducation, state, setState, to_edit, setEdit}) {
-    function changeCompany(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                company: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeSchool(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                school: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changePosition(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                position: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeDegree(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                degree: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeStart(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                start: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeEnd(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                end: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeLocation(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                location: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
-
-    function changeDescription(e) {
-        const updatedItems = {
-            ...state["items"],
-            [to_edit]: {
-                ...state["items"][to_edit],
-                description: e.target.value
-            }
-        }
-        setState({ ...state, items: updatedItems })
-    }
 
     const [ original, setOriginal ] = useState(state)
+
+
+    function curryChange(key) {
+        return (e) => {
+            const updatedItems = {
+                ...state["items"],
+                [to_edit]: {
+                    ...state["items"][to_edit],
+                    [key]: e.target.value
+                }
+            }
+            setState({ ...state, items: updatedItems })
+        }
+    }
+
     function exit() {
         setEdit(null)
     }
-
+    
     function cancelChange() {
         if (original["show"][original["show"].length - 1] === to_edit) {
             if (Object.values(original["items"][to_edit]).every(value => value === "")) {
@@ -258,29 +186,29 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
             <Input
                 label={ isEducation ? "School" : "Company Name" }
                 value={ isEducation ? state["items"][to_edit]["school"] : state["items"][to_edit]["company"] }
-                handleChange={ isEducation ? changeSchool : changeCompany }
+                handleChange={ isEducation ? curryChange("school") : curryChange("company") }
             />
             <Input
                 label={ isEducation ? "Degree" : "Position" }
                 value={ isEducation ? state["items"][to_edit]["degree"] : state["items"][to_edit]["position"] }
-                handleChange={ isEducation ? changeDegree : changePosition }
+                handleChange={ isEducation ? curryChange("degree") : curryChange("position") }
             />
             <div className="dates">
                 <Input
                     label="Start Date"
                     value={ state["items"][to_edit]["start"] }
-                    handleChange={ changeStart }
+                    handleChange={ curryChange("start") }
                 />
                 <Input
                     label="End Date"
                     value={ state["items"][to_edit]["end"] }
-                    handleChange={ changeEnd }
+                    handleChange={ curryChange("end") }
                 />
             </div>
             <Input
                 label="Location"
                 value={ state["items"][to_edit]["location"] }
-                handleChange={ changeLocation }
+                handleChange={ curryChange("location") }
             />
             { !isEducation && (
                 <label>
@@ -288,13 +216,13 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
                     {' '}
                     <textarea
                         value={ state["items"][to_edit]["description"] }
-                        onChange={ changeDescription }
+                        onChange={ curryChange("description") }
                     />
                 </label>
             )}
             <div className="buttons">
-                <button onClick={cancelChange} style={ { cursor: "pointer" } }> Cancel </button>
-                <button onClick={exit} style={ { cursor: "pointer" } }> Save </button>
+                <button onClick={ cancelChange } style={ { cursor: "pointer" } }> Cancel </button>
+                <button onClick={ exit } style={ { cursor: "pointer" } }> Save </button>
             </div>
         </div>
     )
