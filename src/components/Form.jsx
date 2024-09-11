@@ -122,8 +122,8 @@ function StandardInputs({ isEducation, state, setState }) {
                                 item={ item }
                                 handleChange={ () => changeVisibility(item_id) }
                                 showIcon={ state["show"].includes(item_id) }
-                                handleEdit={ () => changeEdit(item_id) }>
-                            </ObjectElement>
+                                handleEdit={ () => changeEdit(item_id) }
+                            />
                         )}
                     </ul>
                     <button onClick={ createNew } style={ { background: 'none', border: 'none', cursor: 'pointer' } }
@@ -141,8 +141,8 @@ function StandardInputs({ isEducation, state, setState }) {
                     state={ state }
                     setState={ setState }
                     to_edit={ edit }
-                    setEdit={ setEdit }>
-                </Edit>
+                    setEdit={ setEdit }
+                />
             )}
         </div>
     )
@@ -150,7 +150,7 @@ function StandardInputs({ isEducation, state, setState }) {
 
 function Edit({isEducation, state, setState, to_edit, setEdit}) {
 
-    const [ original, setOriginal ] = useState(state)
+    const [ original, _ ] = useState(state)
 
 
     function curryChange(key) {
@@ -169,7 +169,7 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
     function exit() {
         setEdit(null)
     }
-    
+
     function cancelChange() {
         if (original["show"][original["show"].length - 1] === to_edit) {
             if (Object.values(original["items"][to_edit]).every(value => value === "")) {
@@ -213,7 +213,6 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
             { !isEducation && (
                 <label>
                     Description
-                    {' '}
                     <textarea
                         value={ state["items"][to_edit]["description"] }
                         onChange={ curryChange("description") }
@@ -254,11 +253,10 @@ function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEd
 function Input({label, value, handleChange}) {
     return (
         <label>
-            {label}
-            {' '}
+            { label }
             <input
-                value={value}
-                onChange={handleChange}
+                value={ value }
+                onChange={ handleChange }
             />
         </label>
     )

@@ -1,4 +1,3 @@
-// todo: REFACTORING!!
 import { useState } from 'react'
 import { Personal, StandardInputs } from "./Form.jsx";
 import Resume from "./Resume.jsx"
@@ -117,24 +116,24 @@ function App() {
                                                                 })
 
     function clear() {
-        setPersonal({name: "", email: "", phone: "", address: ""})
+        setPersonal({ name: "", email: "", phone: "", address: "" })
 
-        const blank_state = {show: [], items: {}}
+        const blank_state = { show: [ ], items: { } }
         setEducation(blank_state)
         setExperience(blank_state)
     }
 
     function loadExample() {
-        setPersonal(originals["personal"])
-        setEducation(originals["education"])
-        setExperience(originals["experience"])
+        setPersonal(originals[ "personal" ])
+        setEducation(originals[ "education" ])
+        setExperience(originals[ "experience" ])
     }
     return (
         <>
             <div id="inputs">
                 <Personal
-                    state={personal}
-                    setState={setPersonal}
+                    state={ personal }
+                    setState={ setPersonal }
                 />
                 <StandardInputs
                     isEducation={ true }
@@ -147,18 +146,18 @@ function App() {
                     setState={ setExperience }
                 />
                 <div className="template-buttons">
-                    <button onClick={clear} style={{cursor: "pointer"}}>
+                    <button onClick={ clear } style={ { cursor: "pointer" } }>
                         Clear
                     </button>
-                    <button onClick={loadExample} style={{cursor: "pointer"}}>
+                    <button onClick={ loadExample } style={ { cursor: "pointer" } }>
                         Load Example
                     </button>
                 </div>
             </div>
             <Resume
-                personal={personal}
-                education={education}
-                experience={experience}
+                personal={ personal }
+                education={ education }
+                experience={ experience }
             />
         </>
     )

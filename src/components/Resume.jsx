@@ -32,15 +32,15 @@ export default function Resume({ personal, education, experience }) {
             {(education["show"].length) > 0 &&
                     <Items
                         isEducation={true}
-                        state={education}>
-                    </Items>
+                        state={education}
+                    />
             }
 
             {(experience["show"].length) > 0 &&
                 <Items
                     isEducation={false}
-                    state={experience}>
-                </Items>
+                    state={experience}
+                />
             }
         </div>
     )
@@ -57,16 +57,16 @@ function Items({isEducation, state }) {
                             <div key={key} className="item">
                                 <Left start={item["start"]}
                                       end={item["end"]}
-                                      location={item["location"]}>
-                                </Left>
+                                      location={item["location"]}
+                                />
                                 {isEducation ?
                                     <EducationRight school={item["school"]}
-                                                    degree={item["degree"]}>
-                                    </EducationRight> :
+                                                    degree={item["degree"]}
+                                    /> :
                                     <ExperienceRight company={item["company"]}
                                                      position={item["position"]}
                                                      description={item["description"]}
-                                    ></ExperienceRight>
+                                    />
                                 }
                             </div>
                         )
