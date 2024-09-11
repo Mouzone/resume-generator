@@ -1,3 +1,4 @@
+// todo: REFACTORING!!
 import { useState } from 'react'
 import { Personal, Education, Experience } from "./Form.jsx";
 import Resume from "./Resume.jsx"
@@ -128,7 +129,6 @@ function App() {
         setEducation(originals["education"])
         setExperience(originals["experience"])
     }
-
     return (
         <>
             <div id="inputs">

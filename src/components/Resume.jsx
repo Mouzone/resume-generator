@@ -28,25 +28,32 @@ export default function Resume({ personal, education, experience }) {
                     </p>
                 </div>
             </div>
-            <div id="education">
-                <h2> Education </h2>
-                <Items
-                    isEducation={ true }
-                    state={ education }
-                ></Items>
-            </div>
-            <div id="experience">
-                <h2> Professional Experience </h2>
-                <Items
-                    isEducation={ false }
-                    state={ experience }
-                ></Items>
-            </div>
+
+            {(education["show"].length) > 0 &&
+                <div id="education">
+                    <h2> Education </h2>
+                    <Items
+                        isEducation={true}
+                        state={education}
+                    ></Items>
+                </div>
+            }
+
+            {(experience["show"].length) > 0 &&
+                <div id="experience">
+                    <h2> Professional Experience </h2>
+                    <Items
+                        isEducation={false}
+                        state={experience}
+                    ></Items>
+                </div>
+            }
+
         </div>
     )
 }
 
-function Items({ isEducation, state }) {
+function Items({isEducation, state }) {
     return (
         <div className="items">
             { Object.entries(state["items"]).map(([key, item]) => {
