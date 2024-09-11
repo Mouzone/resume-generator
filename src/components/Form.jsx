@@ -118,7 +118,7 @@ function Education({ state, setState }) {
                     }
                 </button>
             </div>
-            {(show && (edit === null)) && (
+            { (show && (edit === null)) && (
                 <ul>
                     { Object.entries(state["items"]).map(([item_id, item]) =>
                         <ObjectElement
@@ -127,13 +127,13 @@ function Education({ state, setState }) {
                             item={ item }
                             handleChange={ () => changeVisibility(item_id) }
                             showIcon={ state["show"].includes(item_id) }
-                            handleEdit={ () => changeEdit(item_id)}>
+                            handleEdit={ () => changeEdit(item_id) }>
                         </ObjectElement>
                     ) }
                 </ul>
-            )}
+            ) }
 
-            {(show && (edit !== null)) && (
+            { (show && (edit !== null)) && (
                 <Edit
                     isEducation={ true }
                     state={ state }
@@ -141,7 +141,7 @@ function Education({ state, setState }) {
                     to_edit={ edit }
                     setEdit={ setEdit }>
                 </Edit>
-            )}
+            ) }
         </div>
     )
 //     todo: after <ul> add button that adds a new item with new index with empty fields
@@ -157,7 +157,8 @@ function Experience({state, setState}) {
     function changeEdit(key){
         setEdit(key)
     }
-    function changeVisibilitiy(key){
+
+    function changeVisibility(key){
         let new_show
         const old_show = state["show"]
         if (old_show.includes(key)) {
@@ -178,7 +179,7 @@ function Experience({state, setState}) {
                     </svg>
                     Professional Experience
                 </h2>
-                <button onClick={changeShow} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
+                <button onClick={ changeShow } style={ { background: 'none', border: 'none', cursor: 'pointer' } }>
                     { show ? (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M7,15L12,10L17,15H7Z"/>
@@ -198,15 +199,15 @@ function Experience({state, setState}) {
                             isEducation={ false }
                             key={ item_id }
                             item={ item }
-                            handleChange={ () => changeVisibilitiy(item_id) }
+                            handleChange={ () => changeVisibility(item_id) }
                             showIcon={ state["show"].includes(item_id) }
                             handleEdit={ () => changeEdit(item_id) }>
                         </ObjectElement>
-                    )}
+                    ) }
                 </ul>
-            )}
+            ) }
 
-            {(show && (edit !== null)) && (
+            { (show && (edit !== null)) && (
                 <Edit
                     isEducation={ false }
                     state={ state }
@@ -214,7 +215,7 @@ function Experience({state, setState}) {
                     to_edit={ edit }
                     setEdit={ setEdit }>
                 </Edit>
-            )}
+            ) }
         </div>
     )
 
@@ -229,7 +230,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 company: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeSchool(e) {
@@ -240,7 +241,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 school: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changePosition(e) {
@@ -251,7 +252,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 position: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeDegree(e) {
@@ -262,7 +263,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 degree: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeStart(e) {
@@ -273,7 +274,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 start: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeEnd(e) {
@@ -284,7 +285,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 end: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeLocation(e) {
@@ -295,7 +296,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 location: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     function changeDescription(e) {
@@ -306,7 +307,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 description: e.target.value
             }
         }
-        setState({...state, items: updatedItems})
+        setState({ ...state, items: updatedItems })
     }
 
     const [ original, setOriginal ] = useState(state)
@@ -324,7 +325,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
             <Input
                 label={ isEducation ? "School" : "Company Name" }
                 value={ isEducation ? state["items"][to_edit]["school"] : state["items"][to_edit]["company"] }
-                handleChange={ isEducation ? changeSchool : changeCompany() }
+                handleChange={ isEducation ? changeSchool : changeCompany }
             />
             <Input
                 label={ isEducation ? "Degree" : "Position" }
@@ -369,7 +370,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
 function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit }) {
     return (
         <li key={id}>
-            <h3 onClick={handleEdit}> { isEducation ? item["school"] : item["company"] } </h3>
+            <h3 onClick={ handleEdit }> { isEducation ? item["school"] : item["company"] } </h3>
             <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                 { showIcon ? (
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
