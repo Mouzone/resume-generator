@@ -23,6 +23,8 @@
   padding: 20px;
   width: 150px;
   font-size: 15px;
+  font-weight: bold;
+  box-shadow: 1px 1px 5px black ;
 }
 
 .template-buttons button:first-child {
@@ -31,5 +33,6 @@
 
 #resume {
   width: 60%;
+  box-shadow: 1px 1px 5px black ;
 }
 
