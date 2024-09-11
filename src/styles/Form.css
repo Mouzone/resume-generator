@@ -79,6 +79,10 @@ button:last-child {
     background-color: dodgerblue;
 }
 
+.newItem svg {
+    width: 20px;
+}
+
 textarea {
     height: 100px;
     padding: 10px;
