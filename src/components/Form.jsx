@@ -1,25 +1,23 @@
 import "../styles/Form.css"
 import { useState } from "react";
+
 function Personal({ state, setState }) {
-    function changeName(e) {
-        setState({ ...state, name: e.target.value })
-    }
-
-    function changeEmail(e) {
-        setState({ ...state, email: e.target.value })
-    }
-
-    function changePhone(e) {
-        setState({ ...state, phone: e.target.value })
-    }
-
-    function changeAddress(e) {
-        setState({ ...state, address: e.target.value })
-    }
 
     const [ show, setShow ] = useState(false)
     function changeShow() {
         setShow(!show)
+    }
+    function curryChange(key){
+        return (e) => {
+            setState({ ...state, [key]: e.target.value })
+        }
+    }
+
+    const labels_for_value = {
+        name: "Full Name",
+        email: "Email",
+        phone: "Phone Number",
+        address: "Address"
     }
 
     return (
@@ -47,26 +45,12 @@ function Personal({ state, setState }) {
             </div>
             { show && (
                 <div className="bottom">
-                    <Input
-                        label="Full Name"
-                        value={state["name"]}
-                        handleChange={changeName}
-                    />
-                    <Input
-                        label="Email"
-                        value={state["email"]}
-                        handleChange={changeEmail}
-                    />
-                    <Input
-                        label="Phone Number"
-                        value={state["phone"]}
-                        handleChange={changePhone}
-                    />
-                    <Input
-                        label="Address"
-                        value={state["address"]}
-                        handleChange={changeAddress}
-                    />
+                    { Object.entries(state).map(([key, value]) => {
+                        return <Input
+                            label={ labels_for_value[key] }
+                            value={ value }
+                            handleChange={ curryChange(key) }/>
+                    })}
                 </div>
             )}
         </div>
