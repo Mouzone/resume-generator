@@ -46,7 +46,6 @@ export default function Resume({ personal, education, experience }) {
     )
 }
 
-// todo: when displaying items iterate through items and if in show then show it, thus keeping order it was added
 function Items({ isEducation, state }) {
     return (
         <div className="items">

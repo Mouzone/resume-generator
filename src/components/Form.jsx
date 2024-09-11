@@ -122,6 +122,7 @@ function Education({ state, setState }) {
                 <ul>
                     { Object.entries(state["items"]).map(([item_id, item]) =>
                         <ObjectElement
+                            isEducation={ true }
                             key={ item_id }
                             item={ item }
                             handleChange={ () => changeVisibility(item_id) }
@@ -147,10 +148,24 @@ function Education({ state, setState }) {
 }
 
 function Experience({state, setState}) {
-    const [show, setShow] = useState(false)
+    const [ show, setShow ] = useState(false)
+    const [ edit, setEdit ] = useState(null)
 
     function changeShow() {
         setShow(!show)
+    }
+    function changeEdit(key){
+        setEdit(key)
+    }
+    function changeVisibilitiy(key){
+        let new_show
+        const old_show = state["show"]
+        if (old_show.includes(key)) {
+            new_show = old_show.filter(item => item !== key)
+        } else {
+            new_show = [...old_show, key]
+        }
+        setState({...state, show: new_show})
     }
 
     return (
@@ -176,12 +191,28 @@ function Experience({state, setState}) {
                     }
                 </button>
             </div>
-            { show && (
+            { (show && (edit === null)) && (
+                <ul>
+                    { Object.entries(state["items"]).map(([item_id, item]) =>
+                        <ObjectElement
+                            isEducation={ false }
+                            key={ item_id }
+                            item={ item }
+                            handleChange={ () => changeVisibilitiy(item_id) }
+                            showIcon={ state["show"].includes(item_id) }
+                            handleEdit={ () => changeEdit(item_id) }>
+                        </ObjectElement>
+                    )}
+                </ul>
+            )}
+
+            {(show && (edit !== null)) && (
                 <Edit
                     isEducation={ false }
                     state={ state }
                     setState={ setState }
-                >
+                    to_edit={ edit }
+                    setEdit={ setEdit }>
                 </Edit>
             )}
         </div>
@@ -335,10 +366,10 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
     )
 }
 
-function ObjectElement({ id, item, handleChange, showIcon, handleEdit }) {
+function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit }) {
     return (
         <li key={id}>
-            <h3 onClick={handleEdit}> { item["school"] } </h3>
+            <h3 onClick={handleEdit}> { isEducation ? item["school"] : item["company"] } </h3>
             <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                 { showIcon ? (
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
