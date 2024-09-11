@@ -46,29 +46,31 @@ export default function Resume({ personal, education, experience }) {
     )
 }
 
+// todo: when displaying items iterate through items and if in show then show it, thus keeping order it was added
 function Items({ isEducation, state }) {
     return (
         <div className="items">
-            { state["show"].map(key => {
-                const item = state["items"][key]
-                return (
-                    <div key={ key } className="item">
-                        <Left start={ item["start"] }
-                              end={ item["end"] }
-                              location={ item["location"] }>
-                        </Left>
-                        { isEducation ?
-                            <EducationRight school={ item["school"]}
-                                            degree={ item["degree"]}>
-                            </EducationRight> :
-                            <ExperienceRight company={ item["company"]}
-                                position={ item["position"] }
-                                description={ item["description"]}
-                            ></ExperienceRight>
-                        }
-                    </div>
-                )
-            }) }
+            { Object.entries(state["items"]).map(([key, item]) => {
+                if (state["show"].includes(key)) {
+                    return (
+                        <div key={ key } className="item">
+                            <Left start={ item["start"] }
+                                  end={ item["end"] }
+                                  location={ item["location"] }>
+                            </Left>
+                            { isEducation ?
+                                <EducationRight school={ item["school"]}
+                                                degree={ item["degree"]}>
+                                </EducationRight> :
+                                <ExperienceRight company={ item["company"]}
+                                                 position={ item["position"] }
+                                                 description={ item["description"]}
+                                ></ExperienceRight>
+                            }
+                        </div>
+                    )
+                }
+            })}
         </div>
     )
 }

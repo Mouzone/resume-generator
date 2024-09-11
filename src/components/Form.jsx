@@ -1,6 +1,5 @@
 import "../styles/Form.css"
 import { useState } from "react";
-// todo: work on list view, with data structures and implement edit portion later
 function Personal({ state, setState }) {
     function changeName(e) {
         setState({ ...state, name: e.target.value })
@@ -288,13 +287,13 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
         setState(original)
         exit()
     }
-    // school is not editable for some reason
+
     return (
         <div className="bottom">
             <Input
                 label={ isEducation ? "School" : "Company Name" }
                 value={ isEducation ? state["items"][to_edit]["school"] : state["items"][to_edit]["company"] }
-                handleChange={ isEducation ? changeCompany : changeSchool }
+                handleChange={ isEducation ? changeSchool : changeCompany() }
             />
             <Input
                 label={ isEducation ? "Degree" : "Position" }
@@ -333,7 +332,6 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
                 <button onClick={exit}> Save </button>
             </div>
         </div>
-    // todo: Cancel is sending the state, but it is the current state, since state is updated after each character is typed
     )
 }
 

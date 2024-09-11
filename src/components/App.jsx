@@ -111,12 +111,10 @@ function App() {
         })
 
     // todo: for education and experience:
-    // -- on dropdown show School / Company
-    // -- clicking on the School / Company brings up form with values prefilled and edited
-    // ---- cancel button does not add any changes, save button saves changes
     // -- button to add new School / Company
     // ---- brings up same form, but no pre filled values with same buttons
-    // -- each School / Company have visibility icon that when clicked hide / show it on Resume
+    // -- add option to clear template, but also option to bring back template
+
     return (
         <>
             <div id="inputs">
