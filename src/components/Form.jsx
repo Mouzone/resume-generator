@@ -421,10 +421,11 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
 }
 
 // todo: for description make it keep formatting of the input instead of making it one line
+// todo: edge case when company name isn't put in the edit component is not selectable for that object
 function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit }) {
     return (
         <li key={id}>
-            <h3 onClick={ handleEdit }> { isEducation ? item["school"] : item["company"] } </h3>
+            <h3 onClick={ handleEdit } style={ { cursor: "pointer" } }> { isEducation ? item["school"] : item["company"] }  </h3>
             <button onClick={ handleChange } style={{background: 'none', border: 'none', cursor: 'pointer'}}>
                 { showIcon ? (
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

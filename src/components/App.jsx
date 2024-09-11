@@ -109,29 +109,54 @@ function App() {
                         }
                     }
         })
+    const [ originals, setOriginal ] = useState( {
+                                                                    personal:personal,
+                                                                    education: education,
+                                                                    experience: experience
+                                                                })
 
-    // todo: add option to clear template, but also option to bring back template
+    function clear() {
+        setPersonal({name: "", email: "", phone: "", address: ""})
+
+        const blank_state = {show: [], items: {}}
+        setEducation(blank_state)
+        setExperience(blank_state)
+    }
+
+    function loadExample() {
+        setPersonal(originals["personal"])
+        setEducation(originals["education"])
+        setExperience(originals["experience"])
+    }
 
     return (
         <>
             <div id="inputs">
                 <Personal
-                    state={ personal }
-                    setState={ setPersonal }
+                    state={personal}
+                    setState={setPersonal}
                 />
                 <Education
-                    state={ education }
-                    setState={ setEducation }
+                    state={education}
+                    setState={setEducation}
                 />
                 <Experience
-                    state={ experience }
-                    setState={ setExperience }
+                    state={experience}
+                    setState={setExperience}
                 />
+                <div className="template-buttons">
+                    <button onClick={clear} style={{cursor: "pointer"}}>
+                        Clear
+                    </button>
+                    <button onClick={loadExample} style={{cursor: "pointer"}}>
+                        Load Example
+                    </button>
+                </div>
             </div>
             <Resume
-                personal={ personal }
-                education={ education }
-                experience={ experience }
+                personal={personal}
+                education={education}
+                experience={experience}
             />
         </>
     )

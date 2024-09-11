@@ -10,6 +10,25 @@
   width: 30%;
 }
 
+.template-buttons {
+  display: flex;
+  justify-items: center;
+  align-self: center;
+  gap: 20px;
+}
+
+.template-buttons button {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  width: 150px;
+  font-size: 15px;
+}
+
+.template-buttons button:first-child {
+  background-color: palevioletred;
+}
+
 #resume {
   width: 60%;
 }
