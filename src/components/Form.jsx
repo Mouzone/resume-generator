@@ -167,7 +167,6 @@ function Education({ state, setState }) {
             )}
         </div>
     )
-//     todo: after <ul> add button that adds a new item with new index with empty fields
 }
 
 function Experience({state, setState}) {
@@ -267,7 +266,6 @@ function Experience({state, setState}) {
             )}
         </div>
     )
-
 }
 
 function Edit({isEducation, state, setState, to_edit, setEdit}) {
@@ -365,8 +363,14 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
     }
 
     function cancelChange() {
-        setState(original)
+        if (original["show"][original["show"].length - 1] === to_edit) {
+            if (Object.values(original["items"][to_edit]).every(value => value === "")) {
+                delete original["items"][to_edit]
+                original["show"].pop()
+            }
+        }
         exit()
+        setState({ ...original })
     }
 
     return (
@@ -409,13 +413,14 @@ function Edit({isEducation, state, setState, to_edit, setEdit}) {
                 </label>
             )}
             <div className="buttons">
-                <button onClick={cancelChange} style={{cursor: "pointer"}}> Cancel </button>
-                <button onClick={exit}> Save </button>
+                <button onClick={cancelChange} style={ { cursor: "pointer" } }> Cancel </button>
+                <button onClick={exit} style={ { cursor: "pointer" } }> Save </button>
             </div>
         </div>
     )
 }
 
+// todo: for description make it keep formatting of the input instead of making it one line
 function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit }) {
     return (
         <li key={id}>

@@ -110,10 +110,7 @@ function App() {
                     }
         })
 
-    // todo: for education and experience:
-    // -- button to add new School / Company
-    // ---- brings up same form, but no pre filled values with same buttons
-    // -- add option to clear template, but also option to bring back template
+    // todo: add option to clear template, but also option to bring back template
 
     return (
         <>
