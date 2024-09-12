@@ -260,7 +260,6 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
     )
 }
 
-// todo: rewrite to make the functions inside ObjectElement instead of passing so many
 function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit, handleDelete, moveUp, moveDown }) {
     return (
         <li key={ id }>
