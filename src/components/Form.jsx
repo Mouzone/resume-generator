@@ -69,13 +69,35 @@ function StandardInputs({ isEducation, state, setState }) {
         setEdit(key)
     }
 
-    // todo: figure out if its easier to rewrite order in "items" 
+    // todo: refactor these two functions
     function moveUp(key) {
-
+        const curr_order = Object.keys(state["items"])
+        const key_index = curr_order.indexOf(key)
+        if (key_index !== 0) {
+            const prev_index = key_index - 1
+            curr_order[key_index] = curr_order[prev_index]
+            curr_order[prev_index] = key
+            const new_items = {}
+            curr_order.forEach(key => {
+                new_items[key] = state["items"][key]
+            })
+            setState({ ...state, items: new_items })
+        }
     }
 
     function moveDown(key) {
-
+        const curr_order = Object.keys(state["items"])
+        const key_index = curr_order.indexOf(key)
+        if (key_index !== curr_order.length - 1) {
+            const next_index = key_index + 1
+            curr_order[key_index] = curr_order[next_index]
+            curr_order[next_index] = key
+            const new_items = {}
+            curr_order.forEach(key => {
+                new_items[key] = state["items"][key]
+            })
+            setState({ ...state, items: new_items})
+        }
     }
 
     function changeDelete(key) {
@@ -146,6 +168,8 @@ function StandardInputs({ isEducation, state, setState }) {
                                 showIcon={ state["show"].includes(item_id) }
                                 handleEdit={ () => changeEdit(item_id) }
                                 handleDelete={ () => changeDelete(item_id) }
+                                moveUp={ () => moveUp(item_id) }
+                                moveDown={ () => moveDown(item_id) }
                             />
                         ) }
                     </ul>
@@ -251,7 +275,7 @@ function Edit({ isEducation, state, setState, to_edit, setEdit }) {
 }
 
 // todo: edge case when company name isn't put in the edit component is not selectable for that object
-function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit, handleDelete }) {
+function ObjectElement({ isEducation, id, item, handleChange, showIcon, handleEdit, handleDelete, moveUp, moveDown }) {
     return (
         <li key={ id }>
             <h3 onClick={ handleEdit } style={ { cursor: "pointer" } }> { isEducation ? item[ "school" ] : item[ "company" ] }  </h3>
